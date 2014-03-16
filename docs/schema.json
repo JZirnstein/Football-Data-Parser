@@ -1,0 +1,164 @@
+{
+"title": "Season JSON Schema",
+  "type": "object",
+  "properties": {
+    "season": { "type": "integer", "minimum": 1920 },
+    "games": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+	"type": "object",
+	"properties": {
+	  "home team" : { "type": "string", "enum": ["AFC", "ARI", "ATL", "BAL", "BUF", "CAR", "CHI", "CIN", "CLE", "DAL", "DEN", "DET", "GB", "HOU", "IND", "JAC", "KC", "MIA", "MIN", "NE", "NO", "NFC", "NYG", "NYJ", "OAK", "PHI", "PIT", "SD", "SEA", "SF", "STL", "TB", "TEN", "WAS"] },
+	  "away team" : { "type": "string", "enum": ["AFC", "ARI", "ATL", "BAL", "BUF", "CAR", "CHI", "CIN", "CLE", "DAL", "DEN", "DET", "GB", "HOU", "IND", "JAC", "KC", "MIA", "MIN", "NE", "NO", "NFC", "NYG", "NYJ", "OAK", "PHI", "PIT", "SD", "SEA", "SF", "STL", "TB", "TEN", "WAS"] },
+	  "venue": { "type": "object",
+	    "properties": {
+	      "stadium": { "type": "string" },
+	      "dome": { "type": "boolean" },
+	      "surface": { "type": "string" },
+	      "attendance": { "type": "integer" }
+	    }, "additionalProperties": false },
+	  "datetime": { "type": "object",
+	    "properties": {
+	      "date": { "type": "string", "pattern": "^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$" },
+	      "start time": { "type": "string", "pattern": "^[0-2][0-9]:[0-5][0-9]$" },
+	      "duration": { "type": "integer" }
+	    }, "additionalProperties": false },
+	  "weather": { "type": "object",
+	    "properties": {
+	      "temperature": { "description": "In Fahrenheit", "type": "integer" },
+	      "relative humidity": { "type": "number", "minimum": 0.00, "maximum": 1.00 },
+	      "wind speed": { "description": "Wind Speed in miles per hour", "type": "integer", "minimum": 0 },
+	      "wind chill": { "description": "In Fahrenheit", "type": ["null", "integer"] }
+	    }, "additionalProperties": false },
+	  "betting": { "type": "object",
+	    "properties": {
+	      "winner": { "type": ["string", "null"], "enum": ["AFC", "ARI", "ATL", "BAL", "BUF", "CAR", "CHI", "CIN", "CLE", "DAL", "DEN", "DET", "GB", "HOU", "IND", "JAC", "KC", "MIA", "MIN", "NE", "NO", "NFC", "NYG", "NYJ", "OAK", "PHI", "PIT", "SD", "SEA", "SF", "STL", "TB", "TEN", "WAS", null] },
+	      "spread": { "type": "number", "maximum": 0.0 },
+	      "over under": {"type": "number", "minimum": 0.0 }
+	    }, "additionalProperties": false },
+	  "officials": { "type": "object",
+	    "properties": {
+	      "referee": { "type": "string" },
+	      "umpire": { "type": "string" },
+	      "head linesman": { "type": "string" },
+	      "field judge": { "type": "string" },
+	      "back judge": { "type": "string" },
+	      "side judge": { "type": "string" },
+	      "line judge": { "type": "string" }
+	    }, "additionalProperties": false },
+	  "team stats": { "type": "object",
+	    "properties": {
+	      "home": { "type": "object",
+		"properties": {
+		  "first downs": { "type": "integer", "minimum": 0 },
+		  "rush": { "type": "object", 
+		    "properties": {
+		      "plays": { "type": "integer", "minimum": 0 },
+		      "yards": { "type": "integer" },
+		      "touchdowns": { "type": "integer", "minimum": 0}
+		    }, "additionalProperties": false },
+		  "pass": { "type": "object",
+                    "properties": {
+                      "plays": { "type": "integer", "minimum": 0 },
+                      "yards": { "type": "integer" },
+                      "touchdowns": { "type": "integer", "minimum": 0},
+		      "successful": { "type": "integer", "minimum": 0},
+                      "interceptions": { "type": "integer", "minimum": 0}
+                    }, "additionalProperties": false },
+		  "sacks": { "type": "object",
+                    "properties": {
+                      "plays": { "type": "integer", "minimum": 0 },
+                      "yards": { "type": "integer", "maximum": 0 }
+                    }, "additionalProperties": false },
+                  "fumbles": { "type": "object",
+                    "properties": {
+                      "plays": { "type": "integer", "minimum": 0 },
+                      "yards": { "type": "integer", "minimum": 0 }
+                    }, "additionalProperties": false },
+                  "penalties": { "type": "object",
+                    "properties": {
+                      "plays": { "type": "integer", "minimum": 0 },
+                      "yards": { "type": "integer", "maximum": 0 }
+                    }, "additionalProperties": false }
+		}, "additionalProperties": false },
+	      "away": { "type": "object",
+		"properties": {
+                  "first downs": { "type": "integer", "minimum": 0 },
+                  "rush": { "type": "object", 
+                    "properties": {
+                      "plays": { "type": "integer", "minimum": 0 },
+                      "yards": { "type": "integer" },
+                      "touchdowns": { "type": "integer", "minimum": 0}
+                    }, "additionalProperties": false },
+                  "pass": { "type": "object",
+                    "properties": {
+                      "plays": { "type": "integer", "minimum": 0 },
+                      "yards": { "type": "integer" },
+                      "touchdowns": { "type": "integer", "minimum": 0},
+                      "successful": { "type": "integer", "minimum": 0},
+                      "interceptions": { "type": "integer", "minimum": 0}
+                    }, "additionalProperties": false },
+                  "sacks": { "type": "object",
+                    "properties": {
+                      "plays": { "type": "integer", "minimum": 0 },
+                      "yards": { "type": "integer", "maximum": 0 }
+                    }, "additionalProperties": false },
+                  "fumbles": { "type": "object",
+                    "properties": {
+                      "plays": { "type": "integer", "minimum": 0 },
+                      "yards": { "type": "integer", "minimum": 0 }
+                    }, "additionalProperties": false },
+                  "penalties": { "type": "object",
+                    "properties": {
+                      "plays": { "type": "integer", "minimum": 0 },
+                      "yards": { "type": "integer", "maximum": 0 }
+                    }, "additionalProperties": false }
+                }, "additionalProperties": false 
+	    }, "additionalProperties": false },
+	  "plays": { "type": "array", "minItems": 1, "items":
+	    { "type": "object",
+	      "properties": {
+		"number": { "description": "Unique play ID", "type": "integer", "minimum": 0 },
+		"score": { "type": "object", 
+		  "properties": {
+		    "home": { "type": "integer", "minimum": 0 },
+		    "away": { "type": "integer", "minimum": 0 }
+		  }, "additionalProperties": false },
+		"state": { "type": "object",
+		  "properties": {
+                    "offense": { "type": "string", "enum": ["AFC", "ARI", "ATL", "BAL", "BUF", "CAR", "CHI", "CIN", "CLE", "DAL", "DEN", "DET", "GB", "HOU", "IND", "JAC", "KC", "MIA", "MIN", "NE", "NO", "NFC", "NYG", "NYJ", "OAK", "PHI", "PIT", "SD", "SEA", "SF", "STL", "TB", "TEN", "WAS"] },
+                    "down": { "type": "integer", "minimum": 1, "maximum": 4 },
+		    "yards to first down" : { "type": "integer", "minimum": 1 },
+		    "yards to goal": { "type": "integer", "minimum": 1 },
+		    "time": { "type": "integer", "minimum": 0 }
+                  }, "additionalProperties": false },
+		"play": {"type": "object",
+                  "properties": {
+                    "type": { "type": "string", "enum": [ "complete pass" ] }, //TODO Enumerate all type of plays
+                    "scoring": { "type": "object",
+		      "properties": {
+			"type": { "type": [ "string", null ], "enum": [ null ] }, //TODO Enumerate all types of scoring plays
+			"team": { "type": [ "string", null ], "enum": [ null, "home", "away" ] }
+		      }, "additionalProperties": false }
+                  }, "additionalProperties": false },
+                "turnover": {"type": "object",
+                  "properties": {
+                    "type": { "type": [ "string", null ], "enum": [ null ] }, //TODO Enumerate all type of turnover play types
+                    "recovered by": { "type": [ "string", null ], "enum": [ null, "home", "away" ] }
+                  }, "additionalProperties": false },
+                "penalty": {"type": "object",
+                  "properties": {
+                    "type": { "type": [ "string", null ] },
+                    "on": { "type": [ "string", null ], "enum": [ "AFC", "ARI", "ATL", "BAL", "BUF", "CAR", "CHI", "CIN", "CLE", "DAL", "DEN", "DET", "GB", "HOU", "IND", "JAC", "KC", "MIA", "MIN", "NE", "NO", "NFC", "NYG", "NYJ", "OAK", "PHI", "PIT", "SD", "SEA", "SF", "STL", "TB", "TEN", "WAS" ] },
+		    "player": { "type": "string" },
+		    "yards": { "type": "integer", "maximum": 0 },
+		    "no play": { "type": "boolean" }
+                  }, "additionalProperties": false }
+	      }, "additionalProperties": false }
+	  }
+	}, "additionalProperties": false //End of game properties
+      } //End of game items
+    } //End of games
+  } //End of properties
+} //End of schema
